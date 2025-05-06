@@ -1,0 +1,43 @@
+[package]
+name = "rust_lib_app01"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+flutter_rust_bridge = "=2.9.0"
+
+thiserror = "2.0"
+anyhow = "1.0.97"
+env_logger = "0.10"
+hex = "0.4"
+log = "0.4"
+lazy_static = "1.5"
+tracing = "0.1"
+tracing-subscriber = {version = "0.3", features = ["env-filter", "fmt", "json"]}
+serde = "1.0"
+serde_json = "1.0"
+
+rand_core = "0.6"
+
+futures = "0.3"
+sqlx = {version = "0.8", features = ["runtime-tokio", "sqlite", "macros", "migrate"]}
+tokio = {version = "1", features = ["rt", "rt-multi-thread", "macros"]}
+reqwest = {version = "0.12", features = ["json", "rustls-tls"]}
+rustls = {version = "0.23", default-features = false, features = ["ring"]}
+libsqlite3-sys = { version = "0.28", features = ["bundled-sqlcipher-vendored-openssl"] }
+
+bip39 = "2.1.0"
+zcash_primitives = "0.22"
+zcash_protocol = "0.5"
+
+zcash-vote = {git = "https://github.com/hhanh00/zcash-vote", rev = "f05f5f2569f286f3ef09ed7edfd008a6b4f35777" }
+orchard = {version = "0.11", features = ["vote"]}
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }
+
+[patch.crates-io]
+orchard = {git = "https://github.com/hhanh00/orchard", rev = "75448e6" }
