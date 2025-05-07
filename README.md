@@ -2,15 +2,37 @@
 
 A new Flutter project.
 
-## Getting Started
+## How to make a flutter/rust project
 
-This project is a starting point for a Flutter application.
+1. create project `flutter_rust_bridge_codegen create app01`
+    - add `build-win.yaml`
+1. add fastforce to `build-win.yaml`, remove flutter build
+    - rename appname
+    - add `windows/packaging/exe`
+        - `make_config.yaml`, `setup.iss`
+    - add `distribute_options.yaml`
+1. add android
+    - create JKS file
+    - add `build-android.yaml`
+        - rename appname
+        - rename keyalias
+    - modify `app/build.gradle.kts`
+    - add *repository secrets*
+1. add linux & mac
+    - add `assets/logo.png`
+    - add `linux/packaging/deb`
+        - `make_config.yaml`
+        - `app.appdata.xml` (rename too)
+    - add `misc`
+        - add `app.json`
+        - add `codesign-notarize.sh`
+1. update `pubspec.yaml`
+    - update `CMakefiles.txt` for linux and turn off c++ unused var warnings
+1. install release please and cleanup
+    - copy `ci` and `release-please.yaml`
+    - copy release-please `config` and `manifest`
+    - reset version in manifest
+    - delete test and integration dart folders
 
-A few resources to get you started if this is your first Flutter project:
+Test a release
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
